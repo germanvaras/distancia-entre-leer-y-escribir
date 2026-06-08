@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La distancia entre leer y escribir</title>
+  <meta name="description" content="Una serie de relatos sobre cartas perdidas, guardadas, retenidas o leídas demasiado tarde.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================
+       RESET & BASE — MOBILE FIRST
+    ========================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 72px;
+    }
+
+    body {
+      background-color: #F8F1E6;
+      color: #2F241D;
+      font-family: 'Lora', Georgia, 'Times New Roman', serif;
+      line-height: 1.8;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ==========================================================
+       SKIP LINK — ACCESSIBILITY
+    ========================================================== */
+    .skip-link {
+      position: absolute;
+      top: -120%;
+      left: 1rem;
+      background: #A46A4F;
+      color: #FFF9EF;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      z-index: 300;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 0.75rem;
+    }
+
+    /* ==========================================================
+       FOCUS — GLOBAL
+    ========================================================== */
+    :focus-visible {
+      outline: 2px solid #A46A4F;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ==========================================================
+       HEADER
+    ========================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background-color: rgba(248, 241, 230, 0.93);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
+    }
+
+    .site-header.scrolled {
+      border-bottom-color: rgba(184, 155, 122, 0.28);
+      box-shadow: 0 1px 22px rgba(47, 36, 29, 0.08);
+      background-color: rgba(248, 241, 230, 0.97);
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .site-logo {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #2F241D;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+      max-width: 185px;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .site-nav a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #784D38;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+      color: #A46A4F;
+    }
+
+    /* ==========================================================
+       HERO
+    ========================================================== */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 1.5rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Warm paper texture — layered radial gradients */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 75% 55% at 12% 18%, rgba(184, 155, 122, 0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 65% 50% at 88% 80%, rgba(164, 106, 79, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 90% 70% at 50% 45%, rgba(255, 249, 239, 0.45) 0%, transparent 80%);
+      pointer-events: none;
+    }
+
+    /* Decorative frame — hidden on small screens */
+    .hero-frame {
+      position: absolute;
+      inset: 2.5rem;
+      pointer-events: none;
+      display: none;
+    }
+
+    .hero-frame::before,
+    .hero-frame::after,
+    .hero-frame .corner-tr,
+    .hero-frame .corner-bl {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: rgba(184, 155, 122, 0.38);
+      border-style: solid;
+    }
+
+    .hero-frame::before {
+      top: 0;
+      left: 0;
+      border-width: 1.5px 0 0 1.5px;
+    }
+
+    .hero-frame::after {
+      bottom: 0;
+      right: 0;
+      border-width: 0 1.5px 1.5px 0;
+    }
+
+    .hero-frame .corner-tr {
+      top: 0;
+      right: 0;
+      border-width: 1.5px 1.5px 0 0;
+    }
+
+    .hero-frame .corner-bl {
+      bottom: 0;
+      left: 0;
+      border-width: 0 0 1.5px 1.5px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      width: 100%;
+      animation: fadeUp 1s ease 0.1s both;
+    }
+
+    .hero-ornament {
+      display: block;
+      width: 42px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #B89B7A, transparent);
+      margin: 0 auto 1.75rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.3rem, 9vw, 5.2rem);
+      font-weight: 600;
+      color: #2F241D;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1rem, 3.5vw, 1.45rem);
+      font-weight: 400;
+      font-style: italic;
+      color: #784D38;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-desc {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(0.88rem, 2.2vw, 1.05rem);
+      color: #784D38;
+      max-width: 500px;
+      margin: 0 auto 2.75rem;
+      line-height: 1.75;
+      opacity: 0.88;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 34px;
+      background: linear-gradient(180deg, transparent, #B89B7A);
+    }
+
+    .hero-scroll-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #B89B7A;
+    }
+
+    /* ==========================================================
+       BUTTONS
+    ========================================================== */
+    .btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 2px;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-block;
+      line-height: 1;
+    }
+
+    .btn-primary {
+      background-color: #A46A4F;
+      color: #FFF9EF;
+      border-color: #A46A4F;
+    }
+
+    .btn-primary:hover {
+      background-color: #784D38;
+      border-color: #784D38;
+      color: #FFF9EF;
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: #784D38;
+      border-color: rgba(184, 155, 122, 0.55);
+    }
+
+    .btn-ghost:hover {
+      border-color: #A46A4F;
+      color: #A46A4F;
+    }
+
+    /* ==========================================================
+       ORNAMENTAL DIVIDER
+    ========================================================== */
+    .ornamental-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .od-line {
+      width: 36px;
+      height: 1px;
+      background: rgba(184, 155, 122, 0.5);
+    }
+
+    .od-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(184, 155, 122, 0.55);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================
+       SECTIONS — SHARED
+    ========================================================== */
+    .section {
+      padding: 4.5rem 1.25rem;
+    }
+
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #B89B7A;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.85rem, 5vw, 3rem);
+      font-weight: 600;
+      color: #2F241D;
+      line-height: 1.15;
+      margin-bottom: 0.7rem;
+    }
+
+    .section-subtitle {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(0.88rem, 2vw, 1rem);
+      font-style: italic;
+      color: #784D38;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================
+       INTRODUCTION
+    ========================================================== */
+    .intro-header {
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .intro-paper {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #FFF9EF;
+      position: relative;
+      padding: 2.5rem 1.5rem 2.5rem 2rem;
+      border-radius: 1px;
+      box-shadow:
+        0 2px 6px rgba(47, 36, 29, 0.04),
+        0 10px 36px rgba(47, 36, 29, 0.07),
+        inset 0 0 0 1px rgba(184, 155, 122, 0.14);
+    }
+
+    /* Left accent bar */
+    .intro-paper::before {
+      content: '';
+      position: absolute;
+      top: 2.5rem;
+      bottom: 2.5rem;
+      left: 0;
+      width: 3px;
+      background: linear-gradient(180deg, transparent, #B89B7A 15%, #B89B7A 85%, transparent);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .intro-paper p {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(0.97rem, 2.2vw, 1.08rem);
+      line-height: 1.9;
+      color: #2F241D;
+      margin-bottom: 1.5em;
+    }
+
+    .intro-paper p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Opening line — slightly special */
+    .intro-paper p:first-child {
+      font-style: italic;
+      font-size: clamp(1.02rem, 2.4vw, 1.15rem);
+    }
+
+    /* ==========================================================
+       STORIES
+    ========================================================== */
+    .stories-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .stories-header .ornamental-divider {
+      margin-top: 1.5rem;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      max-width: 1020px;
+      margin: 0 auto;
+    }
+
+    .story-card {
+      background: #FFF9EF;
+      border: 1px solid rgba(184, 155, 122, 0.25);
+      border-radius: 20px;
+      padding: 1.75rem 1.75rem 1.6rem;
+      box-shadow: 0 2px 14px rgba(47, 36, 29, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top shimmer on hover */
+    .story-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      right: 2rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(164, 106, 79, 0.45), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.35s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(47, 36, 29, 0.11);
+      border-color: rgba(184, 155, 122, 0.48);
+    }
+
+    .story-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .story-num {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: rgba(184, 155, 122, 0.55);
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 0.45rem;
+    }
+
+    .story-type {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #B89B7A;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .story-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #2F241D;
+      line-height: 1.25;
+      margin-bottom: 1.3rem;
+    }
+
+    .story-badge {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #A46A4F;
+      border: 1px solid rgba(164, 106, 79, 0.33);
+      padding: 0.28rem 0.72rem;
+      border-radius: 2px;
+    }
+
+    /* ==========================================================
+       CLOSING
+    ========================================================== */
+    .closing-section {
+      text-align: center;
+      padding: 5.5rem 1.25rem 5rem;
+      position: relative;
+    }
+
+    .closing-section .ornamental-divider {
+      margin-bottom: 3.5rem;
+    }
+
+    .closing-quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.25rem, 4.5vw, 2rem);
+      font-weight: 500;
+      font-style: italic;
+      color: #2F241D;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      line-height: 1.55;
+    }
+
+    .closing-cta-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: #784D38;
+      margin-bottom: 2rem;
+    }
+
+    .closing-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .link-instagram {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #A46A4F;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(164, 106, 79, 0.38);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .link-instagram:hover {
+      color: #784D38;
+      border-color: #784D38;
+    }
+
+    /* ==========================================================
+       AUTHOR BYLINE — hero
+    ========================================================== */
+    .hero-byline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-style: italic;
+      color: #B89B7A;
+      margin-bottom: 2rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-byline a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184, 155, 122, 0.4);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-byline a:hover {
+      color: #A46A4F;
+      border-color: rgba(164, 106, 79, 0.5);
+    }
+
+    /* ==========================================================
+       FOOTER
+    ========================================================== */
+    .site-footer {
+      border-top: 1px solid rgba(184, 155, 122, 0.22);
+      padding: 2.25rem 1.25rem;
+      text-align: center;
+    }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #2F241D;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.07em;
+      color: #B89B7A;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-author {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: #B89B7A;
+    }
+
+    .footer-author a {
+      color: #B89B7A;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184, 155, 122, 0.35);
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .footer-author a:hover {
+      color: #A46A4F;
+      border-color: rgba(164, 106, 79, 0.5);
+    }
+
+    /* ==========================================================
+       ANIMATION
+    ========================================================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================
+       RESPONSIVE — TABLET (560px+)
+    ========================================================== */
+    @media (min-width: 560px) {
+      body {
+        font-size: 17px;
+      }
+
+      .site-logo {
+        font-size: 0.95rem;
+        max-width: 240px;
+      }
+
+      .site-nav {
+        gap: 1.4rem;
+      }
+
+      .site-nav a {
+        font-size: 0.65rem;
+      }
+
+      .hero-frame {
+        display: block;
+      }
+
+      .hero-actions {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .stories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* closing-links permanece en columna siempre */
+
+      .intro-paper {
+        padding: 3rem 3.5rem 3rem 4rem;
+      }
+    }
+
+    /* ==========================================================
+       RESPONSIVE — DESKTOP (900px+)
+    ========================================================== */
+    @media (min-width: 900px) {
+      body {
+        font-size: 18px;
+      }
+
+      .site-logo {
+        font-size: 1rem;
+        max-width: none;
+      }
+
+      .site-nav {
+        gap: 1.75rem;
+      }
+
+      .site-nav a {
+        font-size: 0.68rem;
+      }
+
+      .hero {
+        padding: 9rem 2rem 6rem;
+      }
+
+      .section {
+        padding: 6rem 2rem;
+      }
+
+      .stories-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Accessibility: saltar al contenido -->
+  <a class="skip-link" href="#main-content">Ir al contenido principal</a>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="site-header" id="site-header" role="banner">
+    <div class="header-inner">
+      <a href="#inicio" class="site-logo" aria-label="La distancia entre leer y escribir — Volver al inicio">
+        La distancia entre leer y escribir
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#introduccion">Introducción</a>
+        <a href="#historias">Historias</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+
+      <!-- Esquinas decorativas del marco -->
+      <div class="hero-frame" aria-hidden="true">
+        <span class="corner-tr"></span>
+        <span class="corner-bl"></span>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-ornament" aria-hidden="true"></span>
+
+        <h1 class="hero-title" id="hero-title">
+          La distancia entre<br>leer y escribir
+        </h1>
+
+        <p class="hero-subtitle">
+          Cartas que no siempre llegan a destino.
+        </p>
+
+        <p class="hero-byline">
+          por <a href="https://www.instagram.com/varasgerman/" target="_blank" rel="noopener noreferrer">Germán Varas</a>
+        </p>
+
+        <p class="hero-desc">
+          Una serie de relatos sobre cartas perdidas, guardadas, retenidas o leídas demasiado tarde.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#introduccion" class="btn btn-primary">Leer introducción</a>
+          <a href="#historias" class="btn btn-ghost">Ver historias</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+        <div class="hero-scroll-dot"></div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         INTRODUCCIÓN
+    ============================================================ -->
+    <section class="section" id="introduccion" aria-labelledby="intro-title">
+      <div class="section-inner">
+
+        <div class="intro-header">
+          <span class="section-kicker">Antes de las historias</span>
+          <h2 class="section-title" id="intro-title">Introducción</h2>
+          <p class="section-subtitle">
+            Una pregunta: qué ocurre con aquello que se escribe,<br>pero no siempre llega a destino.
+          </p>
+        </div>
+
+        <div class="intro-paper">
+          <p>Las cartas tienen una forma particular de existir. Antes de convertirse en viaje, son duda.</p>
+
+          <p>Primero aparecen las palabras, crudas, casi sin filtro. Después llegan los tachones, las correcciones, las frases que intentan decir lo mismo, pero de manera más amable, más prudente, más soportable. Hay cartas que conocen muchas versiones de sí mismas antes de ser dobladas y guardadas en un sobre.</p>
+
+          <p>En esos borradores late algo difícil de sostener. Lo espontáneo. Lo que se escapa sin permiso. A veces, la primera versión es la más honesta, tan desprolija y expuesta que termina arrugada en el cesto.</p>
+
+          <p>Lo que finalmente se envía es una verdad domesticada, una negociación entre lo que sentimos y lo que creemos que el otro puede recibir.</p>
+
+          <p>Y entonces empieza el trayecto. Entre quien escribió y quien leerá, se abre una distancia llena de incertidumbre. El tiempo interviene, las cosas cambian, la vida sigue su curso.</p>
+
+          <p>Hay cartas que llegan. Otras se pierden. Algunas aparecen demasiado tarde. También existen las que terminan en manos ajenas, o quedan guardadas para siempre en un cajón. Incluso hay cartas que alguien decide retener, en silencio, como si el mensaje fuera demasiado propio para dejarlo ir.</p>
+
+          <p>Lo único seguro es que, en algún momento, alguien escribió.</p>
+
+          <p>Este texto no busca juzgar ni explicar. Solo detenerse en ese gesto: una persona, un papel, una verdad que intenta salir.</p>
+
+          <p>Las historias que siguen exploran esa zona frágil donde una carta —enviada o no— puede torcer un destino, adelantarlo, esconderlo o dejarlo suspendido para siempre.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LAS HISTORIAS
+    ============================================================ -->
+    <section class="section" id="historias" aria-labelledby="stories-title">
+      <div class="section-inner">
+
+        <div class="stories-header">
+          <span class="section-kicker">Relatos</span>
+          <h2 class="section-title" id="stories-title">Las historias</h2>
+          <p class="section-subtitle">Distintas cartas. Distintas formas de distancia.</p>
+          <div class="ornamental-divider" aria-hidden="true">
+            <span class="od-line"></span>
+            <span class="od-dot"></span>
+            <span class="od-dot"></span>
+            <span class="od-dot"></span>
+            <span class="od-line"></span>
+          </div>
+        </div>
+
+        <div class="stories-grid">
+
+          <article class="story-card">
+            <span class="story-num" aria-hidden="true">I</span>
+            <span class="story-type">Carta perdida</span>
+            <h3 class="story-title">El silencio del mar</h3>
+            <span class="story-badge" aria-label="Estado: Próximamente">Próximamente</span>
+          </article>
+
+          <article class="story-card">
+            <span class="story-num" aria-hidden="true">II</span>
+            <span class="story-type">Carta encontrada</span>
+            <h3 class="story-title">Verdades sobre la mesa</h3>
+            <span class="story-badge" aria-label="Estado: Próximamente">Próximamente</span>
+          </article>
+
+          <article class="story-card">
+            <span class="story-num" aria-hidden="true">III</span>
+            <span class="story-type">Carta guardada</span>
+            <h3 class="story-title">Casi que existo</h3>
+            <span class="story-badge" aria-label="Estado: Próximamente">Próximamente</span>
+          </article>
+
+          <article class="story-card">
+            <span class="story-num" aria-hidden="true">IV</span>
+            <span class="story-type">Carta retenida</span>
+            <h3 class="story-title">Lo que no se dejó decir</h3>
+            <span class="story-badge" aria-label="Estado: Próximamente">Próximamente</span>
+          </article>
+
+          <article class="story-card">
+            <span class="story-num" aria-hidden="true">V</span>
+            <span class="story-type">Carta que llegó tarde</span>
+            <h3 class="story-title">Sin receptor</h3>
+            <span class="story-badge" aria-label="Estado: Próximamente">Próximamente</span>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CIERRE
+    ============================================================ -->
+    <section class="closing-section" aria-labelledby="closing-quote-id">
+
+      <div class="ornamental-divider" aria-hidden="true">
+        <span class="od-line"></span>
+        <span class="od-dot"></span>
+        <span class="od-dot"></span>
+        <span class="od-dot"></span>
+        <span class="od-line"></span>
+      </div>
+
+      <blockquote>
+        <p class="closing-quote" id="closing-quote-id">
+          Si hoy todo llega tan rápido, ¿qué hacemos con aquello que todavía necesita tiempo para poder ser dicho?
+        </p>
+      </blockquote>
+
+      <p class="closing-cta-text">Seguí la serie en Instagram.</p>
+
+      <div class="closing-links">
+        <a href="https://www.instagram.com/varasgerman/" target="_blank" rel="noopener noreferrer" class="link-instagram" aria-label="Seguir el proyecto en Instagram — @varasgerman">
+          Instagram
+        </a>
+        <a href="#inicio" class="btn btn-ghost">Volver al inicio</a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <p class="footer-name">La distancia entre leer y escribir</p>
+    <p class="footer-tagline">Proyecto narrativo sobre cartas, silencios y verdades que intentan llegar.</p>
+    <p class="footer-author">
+      por <a href="https://www.instagram.com/varasgerman/" target="_blank" rel="noopener noreferrer">Germán Varas</a>
+    </p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* --- Header scroll effect --- */
+    (function () {
+      var header = document.getElementById('site-header');
+      var ticking = false;
+
+      function updateHeader() {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(updateHeader);
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    /* --- Smooth scroll con foco accesible --- */
+    (function () {
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var id = this.getAttribute('href');
+          if (id === '#') return;
+          var target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
