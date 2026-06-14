@@ -749,6 +749,140 @@
         grid-template-columns: repeat(3, 1fr);
       }
     }
+
+    /* ==========================================================
+       STORY CARD — historia disponible
+    ========================================================== */
+    .story-desc {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.88rem;
+      color: #6F6257;
+      line-height: 1.7;
+      margin-bottom: 1.3rem;
+    }
+
+    /* ==========================================================
+       NAV DROPDOWN — Historias
+    ========================================================== */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-toggle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #784D38;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-dropdown-toggle:hover { color: #A46A4F; }
+
+    .nav-arrow {
+      font-size: 0.65em;
+      display: inline-block;
+      transition: transform 0.22s ease;
+      line-height: 1;
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] .nav-arrow {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] {
+      color: #A46A4F;
+    }
+
+    /* Menú flotante */
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 0.85rem);
+      right: 0;
+      background: #FFF9EF;
+      border: 1px solid rgba(184, 155, 122, 0.28);
+      border-radius: 4px;
+      box-shadow:
+        0 4px 16px rgba(47, 36, 29, 0.08),
+        0 16px 40px rgba(47, 36, 29, 0.08);
+      min-width: 210px;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+      z-index: 200;
+    }
+
+    .nav-dropdown-toggle[aria-expanded="true"] + .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Cada historia en el menú */
+    .nav-story-item {
+      display: block;
+      padding: 0.7rem 1.1rem;
+      text-decoration: none;
+      transition: background-color 0.18s ease;
+      border-bottom: 1px solid rgba(184, 155, 122, 0.1);
+    }
+
+    .nav-story-item:last-child { border-bottom: none; }
+
+    .nav-story-item:hover { background-color: rgba(184, 155, 122, 0.08); }
+
+    .nav-story-item--soon {
+      cursor: default;
+      opacity: 0.55;
+    }
+
+    .nav-story-item--soon:hover { background-color: transparent; }
+
+    .nav-story-meta {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #B89B7A;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .nav-story-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #2F241D;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .nav-story-item:hover .nav-story-name { color: #A46A4F; }
+
+    @media (min-width: 560px) {
+      .nav-dropdown-toggle {
+        font-size: 0.65rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .nav-dropdown-toggle {
+        font-size: 0.68rem;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -767,7 +901,47 @@
       <nav class="site-nav" aria-label="Navegación principal">
         <a href="#inicio">Inicio</a>
         <a href="#introduccion">Introducción</a>
-        <a href="#historias">Historias</a>
+
+        <div class="nav-dropdown">
+          <button
+            class="nav-dropdown-toggle"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-controls="nav-historias-menu"
+          >
+            Historias
+            <span class="nav-arrow" aria-hidden="true">↓</span>
+          </button>
+          <div class="nav-dropdown-menu" id="nav-historias-menu" role="menu">
+
+            <a href="el-silencio-del-mar.html" class="nav-story-item" role="menuitem">
+              <span class="nav-story-meta">I · Carta perdida</span>
+              <span class="nav-story-name">El silencio del mar</span>
+            </a>
+
+            <div class="nav-story-item nav-story-item--soon" role="menuitem" aria-disabled="true">
+              <span class="nav-story-meta">II · Carta encontrada</span>
+              <span class="nav-story-name">Verdades sobre la mesa</span>
+            </div>
+
+            <div class="nav-story-item nav-story-item--soon" role="menuitem" aria-disabled="true">
+              <span class="nav-story-meta">III · Carta guardada</span>
+              <span class="nav-story-name">Casi que existo</span>
+            </div>
+
+            <div class="nav-story-item nav-story-item--soon" role="menuitem" aria-disabled="true">
+              <span class="nav-story-meta">IV · Carta retenida</span>
+              <span class="nav-story-name">Lo que no se dejó decir</span>
+            </div>
+
+            <div class="nav-story-item nav-story-item--soon" role="menuitem" aria-disabled="true">
+              <span class="nav-story-meta">V · Carta que llegó tarde</span>
+              <span class="nav-story-name">Sin receptor</span>
+            </div>
+
+          </div>
+        </div>
+
       </nav>
     </div>
   </header>
@@ -879,7 +1053,8 @@
             <span class="story-num" aria-hidden="true">I</span>
             <span class="story-type">Carta perdida</span>
             <h3 class="story-title">El silencio del mar</h3>
-            <span class="story-badge" aria-label="Estado: Próximamente">Próximamente</span>
+            <p class="story-desc">Una carta cruza el océano, pero nunca llega a destino. Del otro lado, la espera empieza a parecerse demasiado al olvido.</p>
+            <a href="el-silencio-del-mar.html" class="btn btn-primary">Leer historia</a>
           </article>
 
           <article class="story-card">
@@ -982,6 +1157,30 @@
           ticking = true;
         }
       }, { passive: true });
+    })();
+
+    /* --- Nav dropdown — toggle + cierre al hacer click afuera --- */
+    (function () {
+      var toggle = document.querySelector('.nav-dropdown-toggle');
+      if (!toggle) return;
+
+      toggle.addEventListener('click', function () {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.nav-dropdown')) {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
     })();
 
     /* --- Smooth scroll con foco accesible --- */
