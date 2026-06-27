@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verdades sobre la mesa — La distancia entre leer y escribir</title>
-  <meta name="description" content="Una carta llega a manos equivocadas. O quizás a las únicas manos que todavía podían recibirla.">
+  <title>Casi que existo — La distancia entre leer y escribir</title>
+  <meta name="description" content="Una carta que se escribe para existir y termina guardada en un cajón.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,14 +196,12 @@
       overflow: hidden;
     }
 
-    /* Mobile: columna — portada centrada como libro, texto abajo */
     .chapter-hero-layout {
       display: flex;
       flex-direction: column;
-      padding-top: 4.5rem; /* compensa el header fijo */
+      padding-top: 4.5rem;
     }
 
-    /* Portada: centrada, proporciones naturales — sin recorte */
     .chapter-cover {
       display: flex;
       justify-content: center;
@@ -234,7 +232,6 @@
       display: none;
     }
 
-    /* Texto del hero */
     .chapter-hero-text {
       padding: 2.5rem 1.25rem 3.5rem;
     }
@@ -314,7 +311,6 @@
       margin-bottom: 2.75rem;
     }
 
-    /* Bloque epistolar */
     .letter-block {
       background: #FFF9EF;
       border-left: 2px solid #B89B7A;
@@ -333,14 +329,6 @@
       color: #B89B7A;
       display: block;
       margin-bottom: 1.1rem;
-    }
-
-    .letter-salutation {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 1rem;
-      color: #2F241D;
-      margin-bottom: 1rem;
-      line-height: 1.8;
     }
 
     .letter-body p {
@@ -365,7 +353,6 @@
       line-height: 1.7;
     }
 
-    /* Separador de voz: carta → narrador */
     .voice-shift {
       display: flex;
       align-items: center;
@@ -390,7 +377,6 @@
       opacity: 0.8;
     }
 
-    /* Narración */
     .narrative-body p {
       font-family: 'Lora', Georgia, serif;
       font-size: clamp(1rem, 2.2vw, 1.08rem);
@@ -471,6 +457,10 @@
       margin-top: 2.25rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(184, 155, 122, 0.18);
+      display: flex;
+      justify-content: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
     }
 
     /* ==========================================================
@@ -544,7 +534,6 @@
 
     /* ==========================================================
        RESPONSIVE — DESKTOP (800px+)
-       Imagen a la derecha, texto a la izquierda
     ========================================================== */
     @media (min-width: 800px) {
       .story-header-inner {
@@ -556,7 +545,6 @@
         max-width: none;
       }
 
-      /* Row: texto izq (order:1), imagen der (order:2) */
       .chapter-hero-layout {
         flex-direction: row;
         align-items: flex-start;
@@ -654,13 +642,13 @@
     <!-- ============================================================
          HERO DEL CAPÍTULO
     ============================================================ -->
-    <section class="chapter-hero" aria-labelledby="cap2-title">
+    <section class="chapter-hero" aria-labelledby="cap3-title">
       <div class="chapter-hero-layout">
 
         <div class="chapter-cover">
           <img
-            src="verdades-sobre-la-mesa.jpg"
-            alt="Portada de Verdades sobre la mesa — una mujer lee una carta en una mesa mientras una niña la observa desde la puerta"
+            src="casi-que-existo.jpg"
+            alt="Portada de Casi que existo — una mujer escribe sola en una mesa bajo una luz tenue"
             class="chapter-cover-img"
             loading="eager"
             onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
@@ -669,11 +657,11 @@
         </div>
 
         <div class="chapter-hero-text">
-          <span class="chapter-kicker">Segunda historia · Carta encontrada</span>
-          <h1 class="chapter-title" id="cap2-title">Verdades sobre la mesa</h1>
-          <p class="chapter-epigraph">"Una pregunta sencilla y devastadora."</p>
-          <p class="chapter-tagline">Una carta que llega antes de que el secreto pueda sobrevivir.</p>
-          <p class="chapter-desc">Una carta llega a manos equivocadas. O quizás a las únicas manos que todavía podían recibirla.</p>
+          <span class="chapter-kicker">Tercera historia · Carta guardada</span>
+          <h1 class="chapter-title" id="cap3-title">Casi que existo</h1>
+          <p class="chapter-epigraph">"Yo también existo. O existí. Ya no estoy tan segura."</p>
+          <p class="chapter-tagline">Una carta que se escribe para existir y termina en un cajón.</p>
+          <p class="chapter-desc">Una mujer escribe lo que nunca se animó a decir. La firma. Y luego la guarda para siempre.</p>
           <div class="chapter-actions">
             <a href="#lectura" class="btn btn-primary">Leer historia</a>
             <a href="index.html#historias" class="btn btn-ghost">Volver a historias</a>
@@ -686,7 +674,7 @@
     <!-- ============================================================
          CUERPO DE LECTURA
     ============================================================ -->
-    <section class="chapter-body" id="lectura" aria-label="Verdades sobre la mesa — lectura">
+    <section class="chapter-body" id="lectura" aria-label="Casi que existo — lectura">
       <div class="chapter-body-inner">
 
         <div class="chapter-body-ornament" aria-hidden="true">
@@ -699,20 +687,21 @@
           </div>
         </div>
 
-        <!-- Carta de Andrés -->
-        <article class="letter-block" aria-label="Carta de Andrés, Bariloche, 27 de septiembre de 1988">
-          <time class="letter-date" datetime="1988-09-27">Bariloche, 27 de septiembre de 1988</time>
-          <p class="letter-salutation">Teresa:</p>
+        <!-- Carta de Lucia -->
+        <article class="letter-block" aria-label="Carta de Lucia, Mendoza, 18 de mayo de 1972">
+          <time class="letter-date" datetime="1972-05-18">Mendoza, 18 de mayo de 1972</time>
           <div class="letter-body">
-            <p>No sé si esta carta te va a encontrar. Hace muchos años que no sé nada de vos, pero últimamente pienso demasiado en el pasado. Será que cuando el cuerpo afloja, uno vuelve a los lugares donde alguna vez fue feliz.</p>
-            <p>Cuando me contaste que estabas esperando un hijo y que ibas a seguir adelante con tu matrimonio, entendí lo que eso quería decir. Me dolió, pero lo acepté. Yo era el que sobraba. El que convenía borrar. Lo supe entonces y lo sé ahora.</p>
-            <p>Nunca dudé de que nuestra hija iba a estar mejor así. Pero también fue cruel. Y los dos lo sabíamos.</p>
-            <p>No te escribo para reclamar nada. Solo quisiera saber cómo está. Si creció tranquila. Si fue querida. Si su vida pudo seguir sin esta sombra.</p>
-            <p>A veces me descubro imaginando su cara. Si se parece a vos. Si frunce el ceño cuando piensa. Si tiene tu modo de hablar bajito cuando algo le importa. Son pensamientos simples, pero me sostienen.</p>
-            <p>No quiero verla. No quiero aparecer. No quiero desarmar nada. Ese lugar no es mío.</p>
-            <p>Si esta carta te lastima, rómpela. Pero si podés, aunque sea en dos renglones, decime si fue feliz.</p>
+            <p>No voy a empezar con disculpas, porque no me salen.</p>
+            <p>Estoy cansada. Cansada de despertarme todos los días para convertirme en la persona que se espera que sea. Cansada de cocinar, de sonreír, de asentir, de agradecer. Cansada de estar siempre disponible. Cansada de escuchar antes de hablar. Cansada de cumplir.</p>
+            <p>Cansada de mí.</p>
+            <p>No tengo nada heroico para decir. No soy valiente. No soy especial. Soy una mujer común que hizo lo que correspondía cuando correspondía, porque no había otra opción que se pudiera nombrar sin vergüenza. Y un día, sin darme cuenta, la vida ya estaba decidida por mí.</p>
+            <p>No es culpa tuya. Ni siquiera podría decir que es culpa de alguien. Es peor: es un orden que estaba ahí antes de que yo llegara.</p>
+            <p>Me miro en el espejo y no me reconozco. Veo una señora. Una esposa. Una madre. Una mujer respetable. Todo en orden. Todo correcto. Y yo, en el medio, desaparecí.</p>
+            <p>A veces pienso en irme. Sin explicación. Tomar un bolso chico, subir al primer micro y no volver. No para empezar otra vida. Sino para descansar de esta.</p>
+            <p>No sé si voy a hacerlo. Pero, por primera vez, lo estoy pensando de verdad.</p>
+            <p>Y necesitaba escribir esto alguna vez: yo también existo. O existí. Ya no estoy tan segura.</p>
           </div>
-          <p class="letter-closing">Con eso me alcanza.<br><strong>Andrés</strong></p>
+          <p class="letter-closing">Con cariño, aunque no se note,<br><strong>Lucia</strong></p>
         </article>
 
         <!-- Transición de voz -->
@@ -724,17 +713,11 @@
 
         <!-- Narración -->
         <div class="narrative-body">
-          <p>La carta estaba en el buzón cuando Clara volvió del colegio. Iba a dejarla sobre la mesa, como siempre, pero el nombre de su madre estaba escrito con una letra rara, prolija, desconocida. Sintió una curiosidad inmediata, casi física, de esas que no se discuten. Y la abrió.</p>
-          <p>La leyó de pie, con la mochila todavía colgada. No hubo sospecha lenta ni dudas amables. Fue un golpe directo. Otro hombre. Otra historia. Una verdad escondida durante años. Y lo peor: no era un error. Era algo acomodado con cuidado, guardado debajo de la vida diaria, como el polvo que se barre bajo la cama.</p>
-          <p>El padre que conocía no era su padre. Y el que sí lo era había sido apartado para que nadie viera el destrozo.</p>
-          <p>Sintió un vacío breve, directo, como si algo se desprendiera adentro. No hizo falta pensarlo: ya lo sabía. No lloró. Todavía no. Dobló la carta con cuidado, la dejó abierta sobre la mesa —como si pesara demasiado— y se fue a su cuarto sin saber qué hacer con su propia vida recién revelada.</p>
-          <p>Más tarde entró Teresa. Dejó las llaves. Vio el sobre. Reconoció la letra. Leyó. Y cuando levantó la mirada, Clara estaba en la puerta.</p>
-          <p>Ahí llegaron las lágrimas. No suaves. No limpias. Eran lágrimas cargadas de furia muda, de vergüenza, de traición. Dolor espeso, adulto antes de tiempo.</p>
-          <p>La mirada de Clara era un filo. Cortaba. Decía todo lo que la boca todavía no podía. Y en ese gesto silencioso terminó el secreto.</p>
-          <p>Teresa apoyó la carta en la mesa con manos temblorosas. Supo, sin excusas, que aquello que alguna vez creyó protección ahora era herida. Que el silencio también fabrica daño. Y que el hombre al que le había pedido desaparecer lo había hecho demasiado bien.</p>
-          <p>El silencio se instaló entre ellas. No trajo disculpas. No trajo alivio. Solo la verdad.</p>
-          <p>La carta no pedía nada. No reclamaba nada. Solo hacía una pregunta sencilla y devastadora:</p>
-          <p><em>¿fue feliz?</em></p>
+          <p>Ver su nombre al final de la carta fue como verse a sí misma por primera vez en años. Se asustó. Y, a la vez, respiró. Guardó la carta en un sobre, escribió la dirección y la dejó lista. Esa noche no durmió. A la mañana, todo volvió igual que siempre: la pava, los chicos, la radio, el apuro. Sostuvo el sobre un largo rato y entonces entendió algo terrible: no era solo miedo a irse, era miedo a existir con su propio nombre.</p>
+          <p>Con una mezcla de dolor y costumbre, abrió el cajón de la mesa de luz y dejó la carta adentro. Su firma quedó doblada. Como ella.</p>
+          <p>La vida siguió. Correcta. Impecable. En silencio.</p>
+          <p>Nadie supo nunca que Lucia, una vez, estuvo a un paso real de irse. Para cuando se preguntó quién era, ya era demasiado tarde para empezar de nuevo. O quizá no. Pero ya no se animó a averiguarlo.</p>
+          <p>La carta quedó en el cajón. Y ella también. Aunque, por un instante, alcanzó a existir.</p>
         </div>
 
       </div>
@@ -748,17 +731,17 @@
         <div class="chapter-closing-block">
 
           <blockquote>
-            <p class="chapter-closing-quote">"Si esta carta te lastima, rómpela. Pero si podés, aunque sea en dos renglones, decime si fue feliz."</p>
+            <p class="chapter-closing-quote">"La carta quedó en el cajón. Y ella también. Aunque, por un instante, alcanzó a existir."</p>
           </blockquote>
 
           <div class="chapter-divider" aria-hidden="true"></div>
 
           <span class="chapter-next-label">Siguiente historia</span>
-          <p class="chapter-next-title">Casi que existo</p>
+          <p class="chapter-next-title">Lo que no se dejó decir</p>
+          <span class="chapter-next-status">Próximamente</span>
 
           <nav class="chapter-closing-nav" aria-label="Navegación del capítulo">
-            <a href="el-silencio-del-mar.html" class="btn btn-ghost">← Historia anterior</a>
-            <a href="casi-que-existo.html" class="btn btn-primary">Siguiente historia →</a>
+            <a href="verdades-sobre-la-mesa.html" class="btn btn-ghost">← Historia anterior</a>
           </nav>
 
         </div>
