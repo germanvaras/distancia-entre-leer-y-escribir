@@ -766,37 +766,32 @@
     ========================================================== */
     .nav-dropdown {
       position: relative;
+      display: inline-flex;
+      align-items: center;
     }
 
     .nav-dropdown-toggle {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #784D38;
-      background: none;
-      border: none;
       cursor: pointer;
-      padding: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: color 0.2s ease;
-      white-space: nowrap;
+      position: relative;
+      padding-right: 1.1em;
     }
 
-    .nav-dropdown-toggle:hover { color: #A46A4F; }
-
     .nav-arrow {
-      font-size: 0.65em;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
       display: inline-block;
+      width: 0;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 4px solid currentColor;
       transition: transform 0.22s ease;
-      line-height: 1;
     }
 
     .nav-dropdown-toggle[aria-expanded="true"] .nav-arrow {
-      transform: rotate(180deg);
+      transform: translateY(-50%) rotate(180deg);
     }
 
     .nav-dropdown-toggle[aria-expanded="true"] {
@@ -871,18 +866,6 @@
 
     .nav-story-item:hover .nav-story-name { color: #A46A4F; }
 
-    @media (min-width: 560px) {
-      .nav-dropdown-toggle {
-        font-size: 0.65rem;
-      }
-    }
-
-    @media (min-width: 900px) {
-      .nav-dropdown-toggle {
-        font-size: 0.68rem;
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -903,15 +886,17 @@
         <a href="#introduccion">Introducción</a>
 
         <div class="nav-dropdown">
-          <button
+          <a
             class="nav-dropdown-toggle"
+            role="button"
+            tabindex="0"
             aria-expanded="false"
             aria-haspopup="true"
             aria-controls="nav-historias-menu"
           >
             Historias
-            <span class="nav-arrow" aria-hidden="true">↓</span>
-          </button>
+            <span class="nav-arrow" aria-hidden="true"></span>
+          </a>
           <div class="nav-dropdown-menu" id="nav-historias-menu" role="menu">
 
             <a href="el-silencio-del-mar.html" class="nav-story-item" role="menuitem">
@@ -1201,9 +1186,17 @@
       var toggle = document.querySelector('.nav-dropdown-toggle');
       if (!toggle) return;
 
-      toggle.addEventListener('click', function () {
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
         var expanded = this.getAttribute('aria-expanded') === 'true';
         this.setAttribute('aria-expanded', String(!expanded));
+      });
+
+      toggle.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          this.click();
+        }
       });
 
       document.addEventListener('click', function (e) {
